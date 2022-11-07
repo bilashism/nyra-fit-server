@@ -39,7 +39,7 @@ const client = new MongoClient(uri, {
 
 const run = async () => {
   try {
-    // const database = client.db("sample_db");
+    const database = client.db("nyraFit");
 
     app.post("/jwt", async (req, res) => {
       const userEmail = req.body;
@@ -49,7 +49,8 @@ const run = async () => {
       res.send({ token });
     });
 
-    // const moviesCollection = database.collection("movies");
+    const servicesCollection = database.collection("services");
+
     // const query = {};
     // const options = {};
     // const result = await moviesCollection.findOne(query);
