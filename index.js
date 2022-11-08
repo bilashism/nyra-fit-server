@@ -75,6 +75,17 @@ const run = async () => {
       result = await cursor.toArray();
       res.send(result);
     });
+
+    //  get service specific all testimonials
+    app.get("/testimonials", async (req, res) => {
+      const testimonialsCollection = database.collection("testimonials");
+      const serviceId = req?.query?.serviceId;
+      const query = { serviceId: serviceId };
+      const options = {};
+      const cursor = testimonialsCollection.find(query, options);
+      let result = await cursor.toArray();
+      res.send(result);
+    });
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
