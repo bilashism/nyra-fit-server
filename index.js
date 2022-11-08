@@ -51,10 +51,19 @@ const run = async () => {
 
     const servicesCollection = database.collection("services");
 
-    // const query = {};
-    // const options = {};
-    // const result = await moviesCollection.findOne(query);
-    // console.log(result);
+    app.get("/services", async (req, res) => {
+      const itemsNum = req?.query?.itemsLimit;
+      const query = {};
+      const options = {};
+      const cursor = servicesCollection.find(query, options);
+      let result;
+      if (itemsNum) {
+        result = await cursor.limit(parseInt(itemsNum)).toArray();
+        return res.send(result);
+      }
+      result = await cursor.toArray();
+      res.send(result);
+    });
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
