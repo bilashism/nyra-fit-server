@@ -51,6 +51,17 @@ const run = async () => {
 
     const servicesCollection = database.collection("services");
 
+    //  get single service
+    app.get("/service/:id", async (req, res) => {
+      const itemId = req?.params?.id;
+      const query = { _id: ObjectId(itemId) };
+      const options = {};
+      const result = await servicesCollection.findOne(query, options);
+      // let result = await cursor.toArray();
+      res.send(result);
+    });
+
+    //  get all services
     app.get("/services", async (req, res) => {
       const itemsNum = req?.query?.itemsLimit;
       const query = {};
