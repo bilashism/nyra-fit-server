@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "nyrafitserver",
   "version": "0.0.0",
-  "description": "",
+  "description": "- Github repo: https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -21,5 +21,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism/issues"
+  },
+  "homepage": "https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism#readme"
 }
