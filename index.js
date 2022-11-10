@@ -81,7 +81,7 @@ const run = async () => {
       const testimonialsCollection = database.collection("testimonials");
       const serviceId = req?.query?.serviceId;
       const query = { serviceId: serviceId };
-      const options = {sort: { _id: -1 }};
+      const options = { sort: { _id: -1 } };
       const cursor = testimonialsCollection.find(query, options);
       let result = await cursor.toArray();
       res.send(result);
@@ -102,6 +102,18 @@ const run = async () => {
       const options = {};
       const result = await testimonialsCollection.findOne(query, options);
 
+      res.send(result);
+    });
+
+    //  get all of testimonials
+    app.get("/myReviews", async (req, res) => {
+      const testimonialsCollection = database.collection("testimonials");
+      const userEmail = req?.query?.userEmail;
+      const query = { "reviewer.email": userEmail };
+      console.log(query);
+      const options = { sort: { _id: -1 } };
+      const cursor = testimonialsCollection.find(query, options);
+      let result = await cursor.toArray();
       res.send(result);
     });
   } finally {
