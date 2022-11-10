@@ -65,7 +65,7 @@ const run = async () => {
     app.get("/services", async (req, res) => {
       const itemsNum = req?.query?.itemsLimit;
       const query = {};
-      const options = {};
+      const options = { sort: { _id: -1 } };
       const cursor = servicesCollection.find(query, options);
       let result;
       if (itemsNum) {
@@ -84,6 +84,24 @@ const run = async () => {
       const options = {};
       const cursor = testimonialsCollection.find(query, options);
       let result = await cursor.toArray();
+      res.send(result);
+    });
+
+    //  add service specific testimonial
+    app.post("/testimonials", async (req, res) => {
+      const testimonialsCollection = database.collection("testimonials");
+      const testimony = req.body;
+      const result = await testimonialsCollection.insertOne(testimony);
+      res.send(result);
+    });
+    //  get a specific testimonial
+    app.get("/testimonial/:id", async (req, res) => {
+      const testimonialsCollection = database.collection("testimonials");
+      const testimonyId = req?.params?.id;
+      const query = { _id: ObjectId(testimonyId) };
+      const options = {};
+      const result = await testimonialsCollection.findOne(query, options);
+
       res.send(result);
     });
   } finally {
