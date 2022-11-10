@@ -81,7 +81,7 @@ const run = async () => {
       const testimonialsCollection = database.collection("testimonials");
       const serviceId = req?.query?.serviceId;
       const query = { serviceId: serviceId };
-      const options = {};
+      const options = {sort: { _id: -1 }};
       const cursor = testimonialsCollection.find(query, options);
       let result = await cursor.toArray();
       res.send(result);
