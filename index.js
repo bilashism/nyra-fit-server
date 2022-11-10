@@ -12,7 +12,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const verifyToken = (req, res, next) => {
-  //
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).send({ message: "Unauthorized access" });
+  }
+  const token = authHeader.split(" ").pop();
+  jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
+    if (err) {
+      return res.status(403).send({ message: "Forbidden access" });
+    }
+    req.decoded = decoded;
+    next();
+  });
 };
 
 // localhost server setup
@@ -106,7 +117,7 @@ const run = async () => {
     });
 
     //  get all of testimonials
-    app.get("/myReviews", async (req, res) => {
+    app.get("/myReviews", verifyToken, async (req, res) => {
       const testimonialsCollection = database.collection("testimonials");
       const userEmail = req?.query?.userEmail;
       const query = { "reviewer.email": userEmail };
