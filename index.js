@@ -133,6 +133,26 @@ const run = async () => {
       res.send(result);
     });
 
+    //  update a specific testimonial
+    app.post("/testimonial/:id", verifyToken, async (req, res) => {
+      const testimonialsCollection = database.collection("testimonials");
+      const testimonyId = req?.params?.id;
+      const query = { _id: ObjectId(testimonyId) };
+      const options = {};
+
+      const updatedReview = {
+        $set: req.body
+      };
+
+      const result = await testimonialsCollection.updateOne(
+        query,
+        updatedReview,
+        options
+      );
+
+      res.send(result);
+    });
+
     //  get all of testimonials
     app.get("/myReviews", verifyToken, async (req, res) => {
       const testimonialsCollection = database.collection("testimonials");
