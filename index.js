@@ -115,6 +115,16 @@ const run = async () => {
 
       res.send(result);
     });
+    //  delete a specific testimonial
+    app.delete("/testimonial/:id", verifyToken, async (req, res) => {
+      const testimonialsCollection = database.collection("testimonials");
+      const testimonyId = req?.params?.id;
+      const query = { _id: ObjectId(testimonyId) };
+      const options = {};
+      const result = await testimonialsCollection.deleteOne(query, options);
+
+      res.send(result);
+    });
 
     //  get all of testimonials
     app.get("/myReviews", verifyToken, async (req, res) => {
