@@ -72,6 +72,13 @@ const run = async () => {
       res.send(result);
     });
 
+    //  add a service
+    app.post("/service", verifyToken, async (req, res) => {
+      const newService = req.body;
+      const result = await servicesCollection.insertOne(newService);
+      res.send(result);
+    });
+
     //  get all services
     app.get("/services", async (req, res) => {
       const itemsNum = req?.query?.itemsLimit;
@@ -131,7 +138,6 @@ const run = async () => {
       const testimonialsCollection = database.collection("testimonials");
       const userEmail = req?.query?.userEmail;
       const query = { "reviewer.email": userEmail };
-      console.log(query);
       const options = { sort: { _id: -1 } };
       const cursor = testimonialsCollection.find(query, options);
       let result = await cursor.toArray();
