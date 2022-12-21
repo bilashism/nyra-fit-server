@@ -82,6 +82,9 @@ const run = async () => {
     //  get all services
     app.get("/services", async (req, res) => {
       const itemsNum = req?.query?.itemsLimit;
+      const itemsPerPage = parseInt(req?.query?.itemsPerPage);
+      const page = parseInt(req?.query?.page);
+
       const query = {};
       const options = { sort: { _id: -1 } };
       const cursor = servicesCollection.find(query, options);
@@ -90,8 +93,12 @@ const run = async () => {
         result = await cursor.limit(parseInt(itemsNum)).toArray();
         return res.send(result);
       }
-      result = await cursor.toArray();
-      res.send(result);
+      const count = await servicesCollection.estimatedDocumentCount();
+      result = await cursor
+        .skip(itemsPerPage * page)
+        .limit(itemsPerPage)
+        .toArray();
+      res.send({ count, result });
     });
 
     //  get service specific all testimonials
