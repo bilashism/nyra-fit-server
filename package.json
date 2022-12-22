@@ -1,7 +1,7 @@
 {
   "name": "nyrafitserver",
   "version": "0.0.0",
-  "description": "- Github repo: https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism",
+  "description": "- Github repo: https://github.com/bilashism/nyra-fit-server",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -24,10 +24,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism.git"
+    "url": "git+https://github.com/bilashism/nyra-fit-server.git"
   },
   "bugs": {
-    "url": "https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism/issues"
+    "url": "https://github.com/bilashism/nyra-fit-server/issues"
   },
-  "homepage": "https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-bilashism#readme"
+  "homepage": "https://github.com/bilashism/nyra-fit-server#readme"
 }
